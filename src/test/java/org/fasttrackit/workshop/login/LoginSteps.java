@@ -1,5 +1,7 @@
 package org.fasttrackit.workshop.login;
 
+import com.sdl.selenium.web.utils.Utils;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -25,11 +27,12 @@ public class LoginSteps extends TestBaseNative {
 
     @Given("^I insert valid credentials$")
     public void I_insert_valid_credentials() throws Throwable {
-        WebElement email = driver.findElement(By.id("email"));
-        email.sendKeys("eu@fast.com");
-
-        WebElement password = driver.findElement(By.id("password"));
-        password.sendKeys("eu.pass");
+//        WebElement email = driver.findElement(By.id("email"));
+//        email.sendKeys("eu@fast.com");
+//
+//        WebElement password = driver.findElement(By.id("password"));
+//        password.sendKeys("eu.pass");
+        I_enter_credentials("eu@fast.com", "eu.pass");
     }
 
     @When("^I click Login button$")
@@ -53,16 +56,42 @@ public class LoginSteps extends TestBaseNative {
 
     @Given("^I insert invalid credentials$")
     public void I_insert_invalid_credentials() throws Throwable {
-        WebElement email = driver.findElement(By.id("email"));
-        email.sendKeys("cineva@fast.com");
+        //WebElement email = driver.findElement(By.id("email"));
+        //email.sendKeys("cineva@fast.com");
 
-        WebElement password = driver.findElement(By.id("password"));
-        password.sendKeys("eu.pass");
+       // WebElement password = driver.findElement(By.id("password"));
+       // password.sendKeys("eu.pass");
+        I_enter_credentials("cineva@fast.com", "eu.pass");
     }
 
     @Then("^I expect invalid credentials message$")
     public void I_expect_invalid_credentials_message() throws Throwable {
+        I_expect_message("Invalid user or password!");
+    }
+
+
+    @When("^I enter \"([^\"]*)\"/\"([^\"]*)\" credentials$")
+    public void I_enter_credentials(String emailVal, String passVal) throws Throwable {
+        WebElement email = driver.findElement(By.id("email"));
+        email.sendKeys(emailVal);
+
+        WebElement password = driver.findElement(By.id("password"));
+        password.sendKeys(passVal);
+    }
+
+    @Then("^I expect message \"([^\"]*)\"$")
+    public void I_expect_message(String msg) throws Throwable {
         WebElement error = driver.findElement(By.className("error-msg"));
-        assertThat(error.getText(), is("Invalid user or password!"));
+        assertThat(error.getText(), is(msg));
+
+        Utils.sleep(2000);
+    }
+
+    @Given("^I successfully login$")
+    public void I_successfully_login() throws Throwable {
+        I_access_the_login_page();
+        I_enter_credentials("eu@fast.com", "eu.pass");
+        I_click_Login_button();
+        I_check_if_user_was_logged_in();
     }
 }
