@@ -10,6 +10,6 @@ Feature: Login
   Scenario: Login with wrong credentials
 
     Given I access the login page
-    And I insert valid credentials
+    And I insert invalid credentials
     When I click Login button
     Then I expect invalid credentials message

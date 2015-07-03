@@ -1,8 +1,5 @@
 package org.fasttrackit.workshop.login;
 
-import com.sdl.selenium.web.utils.Utils;
-import cucumber.api.PendingException;
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -26,15 +23,13 @@ public class LoginSteps extends TestBaseNative {
         driver.get("https://dl.dropboxusercontent.com/u/16174618/FastTrackIT/app-demo/login.html");
     }
 
-    @And("^I insert valid credentials$")
+    @Given("^I insert valid credentials$")
     public void I_insert_valid_credentials() throws Throwable {
         WebElement email = driver.findElement(By.id("email"));
         email.sendKeys("eu@fast.com");
 
         WebElement password = driver.findElement(By.id("password"));
         password.sendKeys("eu.pass");
-
-        Utils.sleep(2000);
     }
 
     @When("^I click Login button$")
@@ -56,11 +51,18 @@ public class LoginSteps extends TestBaseNative {
         assertThat("Could not find logout button", successfulLogin, is(true));
     }
 
-    @Then("^I expect invalid credentials message$")
-    public void I_expect_invalid_credentials_message() throws Throwable {
-        // Express the Regexp above with the code you wish you had
-        throw new PendingException();
+    @Given("^I insert invalid credentials$")
+    public void I_insert_invalid_credentials() throws Throwable {
+        WebElement email = driver.findElement(By.id("email"));
+        email.sendKeys("cineva@fast.com");
 
+        WebElement password = driver.findElement(By.id("password"));
+        password.sendKeys("eu.pass");
     }
 
+    @Then("^I expect invalid credentials message$")
+    public void I_expect_invalid_credentials_message() throws Throwable {
+        WebElement error = driver.findElement(By.className("error-msg"));
+        assertThat(error.getText(), is("Invalid user or password!"));
+    }
 }
