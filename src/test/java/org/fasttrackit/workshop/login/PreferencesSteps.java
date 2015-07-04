@@ -46,7 +46,7 @@ public class PreferencesSteps extends TestBase {
     @Then("^I expect change password message \"([^\"]*)\"$")
     public void I_expect_change_password_message(String msg) throws Throwable {
         preferencesView.checkMessage(msg);
-        LoginSteps.VALID_PASS = VALID_NEWPASS;
+        LoginSteps.VALID_PASS = "eu";
     }
 
     @And("^I logout$")

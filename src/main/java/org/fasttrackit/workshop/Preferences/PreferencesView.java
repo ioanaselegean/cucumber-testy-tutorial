@@ -4,6 +4,9 @@ import com.sdl.selenium.web.WebLocator;
 import com.sdl.selenium.web.button.Button;
 import com.sdl.selenium.web.form.TextField;
 import com.sdl.selenium.web.link.WebLink;
+import com.sdl.selenium.web.table.Table;
+import com.sdl.selenium.web.table.TableCell;
+import com.sdl.selenium.web.table.TableRow;
 import com.sdl.selenium.web.utils.Utils;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -27,10 +30,19 @@ private WebLocator preferencesWindow = new WebLocator().setId("preferences-win")
     public static void main(String args[])
     {
         PreferencesView pv = new PreferencesView();
-        System.out.println(pv.preferencesWindow.getPath());
-        System.out.println(pv.saveButtonEl.getPath());
-        System.out.println(pv.closeButtonEl.getPath());
-        System.out.println(pv.msgEl.getPath());
+        //System.out.println(pv.preferencesWindow.getPath());
+        //System.out.println(pv.saveButtonEl.getPath());
+        //System.out.println(pv.closeButtonEl.getPath());
+        //System.out.println(pv.msgEl.getPath());
+
+        Table table = new Table();
+        TableRow row = table.getRow(
+                new TableCell(2, "Peter"),
+                new TableCell(3, "Parker")
+        );
+        Button editButton = new Button(row, "Second");
+        //Button remove = new Button(row, "Remove", SearchType.CHILD_NODE);
+        System.out.println(editButton.getPath());
     }
 
     public void open() {

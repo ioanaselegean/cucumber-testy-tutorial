@@ -3,6 +3,7 @@ package org.fasttrackit.workshop.login;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import mainMenuView.MainMenuView;
 import org.fasttrackit.util.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -41,15 +42,15 @@ public class LoginSteps extends TestBase {
 
     @Then("^I check if user was logged in$")
     public void I_check_if_user_was_logged_in() throws Throwable {
+MainMenuView.logout.assertExists();
+        //boolean successfulLogin = false;
+        //try {
+        //    WebElement logoutButtonEl = driver.findElement(By.linkText("Logout"));
+       //     successfulLogin = logoutButtonEl.isDisplayed();
+       // } catch (Exception e) {
 
-        boolean successfulLogin = false;
-        try {
-            WebElement logoutButtonEl = driver.findElement(By.linkText("Logout"));
-            successfulLogin = logoutButtonEl.isDisplayed();
-        } catch (Exception e) {
-
-        }
-        assertThat("Could not find logout button", successfulLogin, is(true));
+       // }
+       // assertThat("Could not find logout button", successfulLogin, is(true));
     }
 
     @Given("^I insert invalid credentials$")
