@@ -78,14 +78,9 @@ public class LoginSteps extends TestBaseNative {
         I_expect_message("Invalid user or password!");
     }
 
-
     @When("^I enter \"([^\"]*)\"/\"([^\"]*)\" credentials$")
     public void I_enter_credentials(String emailVal, String passVal) throws Throwable {
-        WebElement email = driver.findElement(By.id("email"));
-        email.sendKeys(emailVal);
-
-        WebElement password = driver.findElement(By.id("password"));
-        password.sendKeys(passVal);
+        loginPage.enterCredentials(emailVal, passVal);
     }
 
     @Then("^I expect message \"([^\"]*)\"$")

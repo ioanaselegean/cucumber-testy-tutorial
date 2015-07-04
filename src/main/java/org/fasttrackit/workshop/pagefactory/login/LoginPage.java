@@ -14,8 +14,19 @@ public class LoginPage {
     @FindBy(how = How.ID, using = "loginButton")
     private WebElement loginButtonEl;
 
+    @FindBy(how = How.ID, using = "email")
+    private WebElement emailEl;
+
+    @FindBy(how = How.ID, using = "password")
+    private WebElement passEl;
+
 
     public void clickOnLoginButton() {
         loginButtonEl.click();
+    }
+
+    public void enterCredentials(String emailVal, String passVal) {
+        emailEl.sendKeys(emailVal);
+        passEl.sendKeys(passVal);
     }
 }
