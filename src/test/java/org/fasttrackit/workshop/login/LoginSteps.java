@@ -9,6 +9,7 @@ import org.fasttrackit.util.TestBaseNative;
 import org.fasttrackit.workshop.pagefactory.login.LoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +19,16 @@ import static org.hamcrest.core.Is.is;
 public class LoginSteps extends TestBaseNative {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginSteps.class);
 
-    LoginPage loginPage = new LoginPage();
+    LoginPage loginPage;
+
+    public LoginSteps() {
+        initPage();
+    }
+
+    public void initPage() {
+        loginPage = PageFactory.
+                initElements(driver, LoginPage.class);
+    }
 
     @Given("^I access the login page$")
     public void I_access_the_login_page() throws Throwable {
@@ -37,7 +47,7 @@ public class LoginSteps extends TestBaseNative {
 
     @When("^I click Login button$")
     public void I_click_Login_button() throws Throwable {
-        loginPage.clickOnLoginButton(driver);
+        loginPage.clickOnLoginButton();
         //clickOnLoginButton();
     }
 
@@ -47,8 +57,7 @@ public class LoginSteps extends TestBaseNative {
         try {
             WebElement btnLogout = driver.findElement(By.partialLinkText("Logout"));
             successfulLogin = btnLogout.isDisplayed();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
 
         }
         assertThat("Could not find logout button", successfulLogin, is(true));
@@ -59,8 +68,8 @@ public class LoginSteps extends TestBaseNative {
         //WebElement email = driver.findElement(By.id("email"));
         //email.sendKeys("cineva@fast.com");
 
-       // WebElement password = driver.findElement(By.id("password"));
-       // password.sendKeys("eu.pass");
+        // WebElement password = driver.findElement(By.id("password"));
+        // password.sendKeys("eu.pass");
         I_enter_credentials("cineva@fast.com", "eu.pass");
     }
 

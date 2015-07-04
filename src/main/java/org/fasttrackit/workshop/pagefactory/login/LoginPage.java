@@ -11,15 +11,11 @@ import org.slf4j.LoggerFactory;
 public class LoginPage {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginPage.class);
 
-    @FindBy(how = How.ID, using = "email")
-    private WebElement emailEl;
+    @FindBy(how = How.ID, using = "loginButton")
+    private WebElement loginButtonEl;
 
-    public void enterEmail(String email) {
-        emailEl.sendKeys(email);
-    }
 
-    public void clickOnLoginButton(WebDriver driver) {
-        WebElement btnLogin = driver.findElement(By.id("loginButton"));
-        btnLogin.click();
+    public void clickOnLoginButton() {
+        loginButtonEl.click();
     }
 }
