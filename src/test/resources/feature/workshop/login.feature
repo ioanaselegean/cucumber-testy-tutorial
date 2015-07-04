@@ -1,3 +1,4 @@
+@screan
 Feature: Login
 
   Scenario: Successful Login

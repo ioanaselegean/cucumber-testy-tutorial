@@ -18,7 +18,7 @@ import static org.hamcrest.core.Is.is;
 public class LoginSteps extends TestBaseNative {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginSteps.class);
 
-    LoginPage loginPage;
+    LoginPage loginPage = new LoginPage();
 
     @Given("^I access the login page$")
     public void I_access_the_login_page() throws Throwable {
@@ -37,8 +37,8 @@ public class LoginSteps extends TestBaseNative {
 
     @When("^I click Login button$")
     public void I_click_Login_button() throws Throwable {
-        WebElement btnLogin = driver.findElement(By.id("loginButton"));
-        btnLogin.click();
+        loginPage.clickOnLoginButton(driver);
+        //clickOnLoginButton();
     }
 
     @Then("^I check if user was logged in$")
