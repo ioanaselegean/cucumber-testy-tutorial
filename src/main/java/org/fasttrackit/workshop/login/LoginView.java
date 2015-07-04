@@ -27,9 +27,7 @@ public class LoginView {
 
     public void enterCredentials(String emailVal, String passVal) {
         emailEl.sendKeys(emailVal);
-        System.out.println("Enter email:" + emailVal);
         passEl.sendKeys(passVal);
-        System.out.println("Enter password:" + passVal);
     }
 
     public void CheckErrorMessage(String msg) {

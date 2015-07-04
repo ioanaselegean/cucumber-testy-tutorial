@@ -14,6 +14,8 @@ import static org.hamcrest.core.Is.is;
 
 public class LoginSteps extends TestBase {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginSteps.class);
+    public static final String VALID_EMAIL = "eu@fast.com";
+    public static String VALID_PASS = "eu.pass";
 
     LoginView loginPage = new   LoginView();
 
@@ -29,7 +31,7 @@ public class LoginSteps extends TestBase {
 //
 //        WebElement password = driver.findElement(By.id("password"));
 //        password.sendKeys("eu.pass");
-        I_enter_credentials("eu@fast.com", "eu.pass");
+        I_enter_credentials(VALID_EMAIL, VALID_PASS);
     }
 
     @When("^I click Login button$")
@@ -39,6 +41,7 @@ public class LoginSteps extends TestBase {
 
     @Then("^I check if user was logged in$")
     public void I_check_if_user_was_logged_in() throws Throwable {
+
         boolean successfulLogin = false;
         try {
             WebElement logoutButtonEl = driver.findElement(By.linkText("Logout"));
@@ -77,7 +80,7 @@ public class LoginSteps extends TestBase {
     @Given("^I successfully login$")
     public void I_successfully_login() throws Throwable {
         I_access_the_login_page();
-        I_enter_credentials("eu@fast.com", "eu.pass");
+        I_enter_credentials(VALID_EMAIL, VALID_PASS);
         I_click_Login_button();
         I_check_if_user_was_logged_in();
     }
